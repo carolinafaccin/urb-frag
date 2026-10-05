@@ -57,10 +57,10 @@ pytest                                           # unit tests + validation again
 | Key | Purpose |
 |---|---|
 | `dataset_dir` | The thesis dataset. Missing GeoPackages are downloaded from Zenodo (about 100 MB) |
-| `raw_dir` | Optional. Shared raw-data catalog with the scored index variables by tract (`prefeituras_municipais/santa_cruz_do_sul/producao_carolina/scs_carolina/algebra_de_mapas/`) and the state's municipalities (`ibge/malha_municipal/2022/`). Without it, the index figures are skipped |
-| `data_dir` | This project's outputs: `tables/`, `figures/` |
+| `sources_dir` | Optional. Shared raw-data catalog with the scored index variables by tract (`prefeituras_municipais/santa_cruz_do_sul/producao_carolina/scs_carolina/algebra_de_mapas/`) and the state's municipalities (`ibge/malha_municipal/2022/`). Without it, the index figures are skipped |
+| `outputs_dir` | This project's outputs: `tables/`, `figures/` |
 
-## Outputs (`data_dir`)
+## Outputs (`outputs_dir`)
 
 | File | Content |
 |---|---|

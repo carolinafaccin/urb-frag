@@ -1,8 +1,8 @@
 """Paths: read from config/config.local.json (gitignored), like the other repositories.
 
 - dataset_dir  the thesis dataset (Zenodo). Downloaded there if the files are missing.
-- raw_dir      shared raw-data catalog (index variables by census tract, state municipalities)
-- data_dir     this project's outputs (tables, figures)
+- sources_dir      shared raw-data catalog (index variables by census tract, state municipalities)
+- outputs_dir     this project's outputs (tables, figures)
 """
 import json
 from pathlib import Path
@@ -21,14 +21,14 @@ CD_MUN = "4316808"
 
 
 def load():
-    """Return (dataset_dir, raw_dir, data_dir); create data_dir subfolders."""
+    """Return (dataset_dir, sources_dir, outputs_dir); create outputs_dir subfolders."""
     cfg_path = ROOT / "config" / "config.local.json"
     if not cfg_path.exists():
         raise SystemExit(f"Missing {cfg_path.name}: copy config/config.local.json.example and set the folders.")
     cfg = json.loads(cfg_path.read_text())
     dataset_dir = Path(cfg["dataset_dir"])
-    raw_dir = Path(cfg["raw_dir"]) if cfg.get("raw_dir") else None
-    data_dir = Path(cfg["data_dir"])
+    sources_dir = Path(cfg["sources_dir"]) if cfg.get("sources_dir") else None
+    outputs_dir = Path(cfg["outputs_dir"])
     for sub in ("tables", "figures"):
-        (data_dir / sub).mkdir(parents=True, exist_ok=True)
-    return dataset_dir, raw_dir, data_dir
+        (outputs_dir / sub).mkdir(parents=True, exist_ok=True)
+    return dataset_dir, sources_dir, outputs_dir
