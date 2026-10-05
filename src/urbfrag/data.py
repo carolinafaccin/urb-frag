@@ -97,18 +97,18 @@ def context(dataset_dir):
     }
 
 
-def load_index(raw_dir):
-    """Scored variables (20 to 100) by 2010 census tract. None if raw_dir does not have them."""
-    if raw_dir is None or not (raw_dir / INDEX).exists():
+def load_index(sources_dir):
+    """Scored variables (20 to 100) by 2010 census tract. None if sources_dir does not have them."""
+    if sources_dir is None or not (sources_dir / INDEX).exists():
         return None
-    g = gpd.read_file(raw_dir / INDEX).to_crs(CRS)
+    g = gpd.read_file(sources_dir / INDEX).to_crs(CRS)
     g = g[g[list(VARIABLES)].notna().all(axis=1)].copy()
     return g.rename(columns={"cd_geocodi": "tract", "nm_bairro": "neighborhood"})
 
 
-def load_state(raw_dir):
-    if raw_dir is None or not (raw_dir / STATE).exists():
+def load_state(sources_dir):
+    if sources_dir is None or not (sources_dir / STATE).exists():
         return None
-    s = gpd.read_file(raw_dir / STATE).to_crs(CRS)
+    s = gpd.read_file(sources_dir / STATE).to_crs(CRS)
     s["is_scs"] = s["CD_MUN"].eq(CD_MUN)
     return s
